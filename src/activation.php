@@ -1,4 +1,8 @@
 <?php
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+  exit;
+}
 
 add_action( 'activated_plugin', 'pricemyway_plugin_activation' );
 

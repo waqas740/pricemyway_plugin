@@ -39,11 +39,13 @@ require_once PRICEMYWAY_PLUGIN_SRC . 'deactivation.php';
 
 require_once PRICEMYWAY_PLUGIN_PAGES . 'dashboard.php';
 require_once PRICEMYWAY_PLUGIN_PAGES . 'auth.php';
+require_once PRICEMYWAY_PLUGIN_PAGES . 'settings.php';
 
 // Hook registrations
 add_action('admin_notices', 'pricemyway_auth_admin_notice');
 // Ensure WooCommerce is active
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+  require_once PRICEMYWAY_PLUGIN_SRC . 'offer_button.php';
 }
 /**
  * Admin notice to prompt authentication.

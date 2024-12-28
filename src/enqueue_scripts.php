@@ -1,4 +1,9 @@
 <?php
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+  exit;
+}
+
 function pricemyway_enqueue_scripts() {
   // Register and enqueue JavaScript file
   wp_register_script('pricemyway-script', PRICEMYWAY_PLUGIN_URL . 'assets/js/pricemyway.js', array('jquery'), '1.0', true); // true for loading in footer

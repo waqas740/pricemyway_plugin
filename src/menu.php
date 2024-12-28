@@ -1,4 +1,9 @@
 <?php
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 add_action('admin_menu', 'pricemyway_create_menu');
 /**
  * Create menu pages for the plugin.
@@ -9,12 +14,29 @@ function pricemyway_create_menu() {
   add_menu_page(
       esc_html__('Pricemyway Dashboard', 'pricemyway'), // Page title
       esc_html__('Pricemyway', 'pricemyway'), // Menu title
-      'manage_options', // Capability
+      '', // Capability
       'pricemyway-dashboard', // Menu slug
-      'pricemyway_dashboard_page',
+      '',
       'data:image/svg+xml;base64,' . base64_encode($icon_svg), // Icon URL
       6 // Position
   );
+  // Add hidden authentication callback page
+  add_submenu_page(
+    "pricemyway-dashboard", // No parent menu
+    esc_html__('Home', 'pricemyway'), // Page title
+    'Home', // Menu title (hidden)
+    'manage_options', // Capability
+    'pricemyway-home', // Menu slug
+    'pricemyway_dashboard_page'
+);
+add_submenu_page(
+    "pricemyway-dashboard", // No parent menu
+    esc_html__('Settings', 'pricemyway'), // Page title
+    'Settings', // Menu title (hidden)
+    'manage_options', // Capability
+    'pricemyway-settings', // Menu slug
+    'pricemyway_render_settings_page'
+);
 
   // Add hidden authentication callback page
   add_submenu_page(

@@ -1,0 +1,16 @@
+2024-12-28 01:40:14 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: 10, Below Price: 0
+2024-12-28 01:40:57 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: 10, Below Price: 0
+2024-12-28 01:41:15 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: 10, Below Price: 0
+2024-12-28 01:41:40 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: 10, Below Price: 0
+2024-12-28 01:41:55 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: 100, Below Price: 0
+2024-12-28 01:42:04 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: , Below Price: 0
+2024-12-28 01:43:16 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: 0, Below Price: 0
+2024-12-28 01:43:33 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: 0, Below Price: 0
+2024-12-28 01:43:39 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: , Below Price: 0
+2024-12-28 01:44:08 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: , Below Price: 0
+2024-12-28 01:44:21 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: 10, Below Price: 0
+2024-12-28 01:44:57 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: 10, Below Price: 0
+2024-12-28 01:45:14 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: 100, Below Price: 0
+2024-12-28 01:45:27 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: 100, Below Price: 1
+2024-12-28 01:46:09 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: 100, Below Price: 20
+2024-12-28 01:47:15 - Product ID: 74, Price: 15, Stock: , Exclude on out of stock: , Above Price: 100, Below Price: 20

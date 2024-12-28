@@ -1,4 +1,9 @@
 <?php
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+  exit;
+}
+
 
 register_deactivation_hook(__FILE__, 'pricemyway_plugin_deactivation');
 /**

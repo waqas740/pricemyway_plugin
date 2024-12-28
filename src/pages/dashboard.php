@@ -2,6 +2,11 @@
 /**
  * Plugin dashboard page.
  */
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 
  function pricemyway_dashboard_page() {
   $auth_completed = get_option('pricemyway_auth_completed', false);
