@@ -26,7 +26,11 @@ function pricemyway_product_details() {
     if($below_price && $product_price <  $below_price ){
         return;
     }
-    add_action($pricemyway_hook, 'pricemyway_add_offer_button');
+    add_action($pricemyway_hook, 
+    function() use ( $product_price ) { 
+        pricemyway_add_offer_button( $product_price ); 
+    });
+    
 }
 
 
@@ -34,24 +38,27 @@ function pricemyway_product_details() {
 
 
 // Add button to WooCommerce product page
-function pricemyway_add_offer_button() {
+function pricemyway_add_offer_button($product_price) {
     $btn_width = get_option( "pricemyway_btn_width", "100%" );
     $btn_bg_color = get_option( "pricemyway_btn_back_color", "#2463eb");
     $btn_text_color = get_option( "pricemyway_btn_text_color","#FFF" );
     $btn_border_color = get_option( "pricemyway_btn_border_color",  "#2463eb" );
     $btn_label = get_option( "pricemyway_btn_label", "Make an Offer" );
+    $button_radius = get_option( "pricemyway_btn_border_radius", "5" );
     // covert into style format
-    $btn_style = "width:{$btn_width}; background-color:{$btn_bg_color}; color:{$btn_text_color}; border-color:{$btn_border_color};";
+    $btn_style = "width:{$btn_width}; background-color:{$btn_bg_color}; color:{$btn_text_color}; border-color:{$btn_border_color}; border-radius:{$button_radius}px;";  
 
     $modal_bg_color = get_option( "pricemyway_modal_back_color", "#374151" );
     $modal_header_bg_color = get_option( "pricemyway_modal_header_bg_color", "#374151" );
     $modal_text_color = get_option( "pricemyway_modal_header_text_color", "#fff" );
     $modal_btn_bg_color = get_option( "pricemyway_modal_btn_back_color", "#2563eb" );
     $modal_btn_text_color = get_option( "pricemyway_modal_btn_text_color", "#fff" );
+    $model_label = get_option( "pricemyway_modal_label", "Make an Offer" );
+    $modal_btn_label = get_option( "pricemyway_modal_btn_label", "Submit Offer" );
     // covert into style format
 
   ?>
-  <button id="pricemyway-offer-btn"  style="<?php echo $btn_style ?>" class="tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center" type="button">
+  <button id="pricemyway-offer-btn"  style="<?php echo $btn_style ?>" class="tw-font-medium tw-text-sm tw-px-5 tw-py-2.5 tw-text-center" type="button">
     <?php echo esc_html__($btn_label, 'pricemyway'); ?>
   </button>
     
@@ -63,7 +70,7 @@ function pricemyway_add_offer_button() {
               <!-- Modal header -->
               <div class="tw-flex tw-items-center tw-justify-between tw-p-4 md:tw-p-5 tw-border-b tw-rounded-t" style="background-color:<?php echo $modal_header_bg_color; ?>">
                   <h3 class="tw-text-xl tw-font-semibold" style="color:<?php echo $modal_text_color; ?>">
-                      <?php echo esc_html__('Make an Offer', 'pricemyway'); ?>
+                      <?php echo esc_html__($model_label, 'pricemyway'); ?>
                   </h3>
                   <button type="button" class="tw-text-gray-400 tw-bg-transparent hover:tw-bg-gray-200 hover:tw-text-gray-900 tw-rounded-lg tw-text-sm tw-w-8 tw-h-8 tw-inline-flex tw-justify-center tw-items-center dark:tw-hover:bg-gray-600 dark:tw-hover:text-white" id="pricemyway-modal-colse-btn">
                       <svg class="tw-w-3 tw-h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -77,13 +84,13 @@ function pricemyway_add_offer_button() {
                   <div id="pricemyway-offer-form " class="tw-flex tw-flex-col tw-space-y-4">
                       <div>
                           <label for="offer_amount" class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"><?php echo esc_html__('Offer Amount', 'pricemyway'); ?></label>
-                          <input type="number" name="offer_amount" id="offer_amount" class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg tw-focus:ring-blue-500 tw-focus:border-blue-500 tw-w-full tw-p-2.5 dark:tw-bg-gray-600 dark:tw-border-gray-500 dark:tw-placeholder-gray-400 dark:tw-text-white" placeholder="Enter your offer amount" required />
+                          <input type="number" min=0 max=<?php echo $product_price?> name="offer_amount" id="offer_amount" class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg tw-focus:ring-blue-500 tw-focus:border-blue-500 tw-w-full tw-p-2.5" placeholder="Enter your offer amount" required />
                       </div>
                       <div>
                           <label for="email" class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"><?php echo esc_html__('Your Email', 'pricemyway'); ?></label>
-                          <input type="email" name="email" id="email" class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg tw-focus:ring-blue-500 tw-focus:border-blue-500 tw-w-full tw-p-2.5 dark:tw-bg-gray-600 dark:tw-border-gray-500 dark:tw-placeholder-gray-400 dark:tw-text-white" placeholder="name@company.com" required />
+                          <input type="email" name="email" id="email" class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg tw-focus:ring-blue-500 tw-focus:border-blue-500 tw-w-full tw-p-2.5" placeholder="name@company.com" required />
                       </div>
-                      <button type="button" class="tw-w-full tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center" style="background-color:<?php echo $modal_btn_bg_color ?> ; color:<?php echo $modal_btn_text_color ?> "><?php echo esc_html__('Submit Offer', 'pricemyway'); ?></button>
+                      <button type="button" class="tw-w-full tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center" style="background-color:<?php echo $modal_btn_bg_color ?> ; color:<?php echo $modal_btn_text_color ?> "><?php echo esc_html__($modal_btn_label, 'pricemyway'); ?></button>
                   </div>
               </div>
           </div>

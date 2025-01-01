@@ -90,7 +90,7 @@ function pricemyway_get_style_settings() {
             'field_key' => 'pricemyway_btn_label',
             'type' => 'text',
             'default' => __( 'Make an offer', 'pricemyway' ),
-            'css' => 'width:30%;',
+            'css' => 'width:80%;',
             'desc' => '',
         ),
         array(
@@ -98,7 +98,7 @@ function pricemyway_get_style_settings() {
             'field_key' => "pricemyway_btn_width",
             'type' => 'text',
             'default' => '80%',
-            'css' => 'width:30%;',
+            'css' => 'width:80%;',
             'desc' => '',
         ),
         array(
@@ -116,6 +116,13 @@ function pricemyway_get_style_settings() {
             'desc' => '',
         ),
         array(
+            'heading' => __( 'Border radius(px)', 'pricemyway' ),
+            'field_key' => "pricemyway_btn_border_radius",
+            'type' => 'number',
+            'default' => '5',
+            'desc' => '',
+        ),
+        array(
             'heading' => __( 'Text color', 'pricemyway' ),
             'field_key' => "pricemyway_btn_text_color",
             'type' => 'color',
@@ -127,6 +134,22 @@ function pricemyway_get_style_settings() {
             'heading' => __( 'Modal Options', 'pricemyway' ),
             'field_key' => 'pricemyway_modal_options',
             'type' => 'title',
+            'desc' => '',
+        ),
+        array(
+            'heading' => __( 'Label', 'pricemyway' ),
+            'field_key' => 'pricemyway_modal_label',
+            'type' => 'text',
+            'default' => __( 'Make an offer', 'pricemyway' ),
+            'css' => 'width:80%;',
+            'desc' => '',
+        ),
+        array(
+            'heading' => __( 'Button label', 'pricemyway' ),
+            'field_key' => 'pricemyway_modal_btn_label',
+            'type' => 'text',
+            'default' => __( 'Submit', 'pricemyway' ),
+            'css' => 'width:80%;',
             'desc' => '',
         ),
         array(
@@ -247,8 +270,33 @@ function pricemyway_render_settings_page() {
         <form method="post" action="options.php">
             <?php
             if ($current_tab === 'style') { 
-              settings_fields('pricemyway_style_settings');
-              do_settings_sections('pricemyway_style_settings');
+                ?>
+                <div class="tw-flex tw-flex-row tw-gap-2">
+                    <div class="tw-w-1/2">
+                        <?php 
+                        settings_fields('pricemyway_style_settings');
+                        do_settings_sections('pricemyway_style_settings');
+                        ?>
+                    </div>
+                    <div class="tw-w-1/2">
+                    <div id="pricemyway-preview-container">
+                        <div class="tw-bg-white tw-p-2 tw-rounded-lg tw-shadow-md tw-mt-3">
+                            <h1 class="tw-text-center"><?php echo esc_html__( 'Button Preview', 'pricemyway' ) ?> </h1>
+                            <div id="pricemyway-button-preview" style="margin: 20px 0; padding: 10px; text-align: center;"></div>
+
+                        </div>
+                        <div class="tw-mt-[310px] tw-bg-white tw-p-2 tw-rounded-lg tw-shadow-md">
+                            <h1 class="tw-text-center"><?php echo esc_html__( 'Modal Preview', 'pricemyway' ) ?> </h1>
+                            <div id="pricemyway-modal-preview" style="margin: 20px 0; padding: 10px; text-align: center;"></div>
+
+                        </div>
+                         
+                    </div>
+
+                    </div>
+                </div>
+                <?php
+              
             }
             else {
               settings_fields('pricemyway_general_settings');
@@ -335,3 +383,31 @@ function pricemyway_render_field( $setting ) {
             break;
     }
 }
+function pricemyway_enqueue_script( $hook ) {
+   
+    wp_enqueue_script(
+        'pricemyway-settings-preview',
+        PRICEMYWAY_PLUGIN_URL . 'assets/js/settings-preview.js',
+        array( 'jquery' ),
+        '1.0',
+        true
+    );
+
+    wp_localize_script( 'pricemyway-settings-preview', 'pricemywaySettings', array(
+        'buttonLabel'  => get_option( 'pricemyway_btn_label', __( 'Make an offer', 'pricemyway' ) ),
+        'buttonWidth'  => get_option( 'pricemyway_btn_width', '80%' ),
+        'buttonBg'     => get_option( 'pricemyway_btn_back_color', '#2463eb' ),
+        'buttonBorder' => get_option( 'pricemyway_btn_border_color', '#2463eb' ),
+        'buttonText'   => get_option( 'pricemyway_btn_text_color', '#FFFFFF' ),
+        'buttonBorderRadius' => get_option( 'pricemyway_btn_border_radius', '5' ),
+        'modalBg'      => get_option( 'pricemyway_modal_back_color', '#374151' ),
+        'modalHeaderBg' => get_option( 'pricemyway_modal_header_bg_color', '#374151' ),
+        'modalHeaderTextColor' => get_option( 'pricemyway_modal_header_text_color', '#FFFFFF' ),
+        'modalBtnBg'   => get_option( 'pricemyway_modal_btn_back_color', '#2463eb' ),
+        'modalBtnText' => get_option( 'pricemyway_modal_btn_text_color', '#FFFFFF' ),
+        'modalLabel'   => get_option( 'pricemyway_modal_label', __( 'Make an offer', 'pricemyway' ) ),
+        'modalBtnLabel' => get_option( 'pricemyway_modal_btn_label', __( 'Submit', 'pricemyway' ) ),
+
+    ) );
+}
+add_action( 'admin_enqueue_scripts', 'pricemyway_enqueue_script' );
