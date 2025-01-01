@@ -63,7 +63,7 @@ function pricemyway_add_offer_button($product_price) {
   </button>
     
   <!-- Main modal -->
-  <div id="pricemyway-modal" tabindex="-1" aria-hidden="true" class="tw-hidden tw-fixed tw-top-0 tw-right-0 tw-left-0 tw-z-50 tw-flex tw-justify-center tw-items-center tw-w-full md:tw-inset-0 tw-h-[calc(100%-1rem)] tw-max-h-full">
+  <div id="pricemyway-modal" tabindex="-1" aria-hidden="true" class="tw-z-[100] tw-hidden tw-fixed tw-top-0 tw-right-0 tw-left-0 tw-z-50 tw-flex tw-justify-center tw-items-center tw-w-full md:tw-inset-0 tw-h-[calc(100%-1rem)] tw-max-h-full">
       <div class="tw-relative tw-p-4 tw-w-full tw-max-w-md tw-max-h-full">
           <!-- Modal content -->
           <div class="tw-relative tw-bg-white tw-rounded-lg tw-shadow" style="background-color:<?php echo $modal_bg_color; ?>">
